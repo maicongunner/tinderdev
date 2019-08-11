@@ -7,7 +7,6 @@ import api from '../services/api';
 import logo from '../assets/logo.png';
 import like from '../assets/like.png';
 import dislike from '../assets/dislike.png';
-import console = require('console');
 
 export default function Main({ navigation }) {
     
@@ -56,15 +55,19 @@ export default function Main({ navigation }) {
 
             <View style={styles.cardsContainer}>                  
                 {
-                    users.map((user, index) => { 
-                        <View key={user._id} style={[styles.card, { zIndex: users.length - index }]}>
-                            <Image style={styles.avatar} source={{ uri: user.avatar }} />
-                            <View style={styles.footer}>
-                                <Text style={styles.name}>{user.name}</Text>
-                                <Text style={styles.bio} numberOfLines={3}>{user.bio}</Text>
+                    users.length === 0
+                    ? <Text style={styles.empty}>Acabou =(</Text>
+                    : (
+                        users.map((user, index) => { 
+                            <View key={user._id} style={[styles.card, { zIndex: users.length - index }]}>
+                                <Image style={styles.avatar} source={{ uri: user.avatar }} />
+                                <View style={styles.footer}>
+                                    <Text style={styles.name}>{user.name}</Text>
+                                    <Text style={styles.bio} numberOfLines={3}>{user.bio}</Text>
+                                </View> 
                             </View> 
-                        </View> 
-                    })
+                        })
+                    ) 
                 }
             </View> 
  
